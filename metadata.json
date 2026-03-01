@@ -1,0 +1,5 @@
+{
+  "name": "HealthAI Dashboard",
+  "description": "Real-time AI-powered health analytics dashboard with intelligent insights, symptom checking, and prediction history.",
+  "requestFramePermissions": []
+}
