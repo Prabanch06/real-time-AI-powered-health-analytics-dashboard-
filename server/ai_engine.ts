@@ -10,7 +10,7 @@ dotenv.config();
 const router = express.Router();
 
 let ai: any = null;
-if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'MY_GEMINI_API_KEY') {
+if (process.env.GEMINI_API_KEY) {
   ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   console.log('✅ Gemini AI Engine initialized successfully');
 } else {
@@ -45,11 +45,17 @@ async function predictDisease(symptoms: string[]) {
     };
   }
 
-  const prompt = `Based on the following symptoms: ${symptoms.join(', ')}. What is the most likely single predicted disease? 
+  const prompt = `You are an advanced medical diagnostic AI. Act as an expert analyzer cross-referencing global medical databases including the 'Human Mortality Database', 'ICMR Data Repository', and 'Pediatric Cancer Data Commons'.
+
+Based on the following patient symptoms: [ ${symptoms.join(', ')} ].
+
+Carefully analyze these symptoms to determine the actual disease. Consider a wide range of possibilities including common ailments, endemic diseases (via ICMR data), pediatric cancers (if applicable to the symptom profile), and severe/fatal conditions (via Mortality patterns).
+Pay special attention to identifying early-stage or advanced immunodeficiency conditions, specifically acute or chronic HIV (HIV positive) infection, and any associated opportunistic infections that might indicate a weakened immune system.
+
 Output strictly as JSON with exactly these fields:
-- predicted_disease (string)
-- probability (number between 0 and 1)
-- risk_level (string, one of: "Low", "Medium", "High")
+- predicted_disease (string, the name of the most likely actual human disease)
+- probability (number between 0 and 1, representing diagnostic confidence)
+- risk_level (string, exactly one of: "Low", "Medium", "High")
 - confidence_score (number between 0 and 100)`;
 
   const response = await ai.models.generateContent({

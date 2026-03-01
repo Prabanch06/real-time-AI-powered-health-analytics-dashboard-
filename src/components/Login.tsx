@@ -46,7 +46,7 @@ export default function Login({ onLogin }: { onLogin: (token: string) => void })
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden mt-8">
         <div className="p-8">
           <div className="flex items-center justify-center mb-8">
-            <Logo className="w-56 h-auto" />
+            <Logo className="w-40 h-auto" />
           </div>
           <div className="flex bg-slate-100 p-1 rounded-lg mb-6">
             <button

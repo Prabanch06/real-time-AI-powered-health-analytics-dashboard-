@@ -63,7 +63,7 @@ export default function Dashboard({ onLogout, token }: { onLogout: () => void; t
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-slate-200 flex flex-col">
         <div className="p-6 flex items-center justify-center border-b border-slate-100">
-          <Logo className="w-48 h-auto" />
+          <Logo className="w-32 h-auto" />
         </div>
 
         <nav className="flex-1 p-4 space-y-2">
